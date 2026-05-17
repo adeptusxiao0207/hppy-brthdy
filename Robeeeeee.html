@@ -38,24 +38,37 @@
             50% { transform: translateY(-40px) scale(1.15) rotate(180deg); }
         }
 
-        /* Magical Floating Elements */
+        /* Ambient Floating Ornaments */
         .sparkle-particle {
             position: absolute;
             bottom: -5%;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             opacity: 0;
-            animation: flyUp 12s linear infinite;
+            animation: flyUp 14s linear infinite;
             z-index: -1;
             pointer-events: none;
         }
         @keyframes flyUp {
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(-105vh) translateX(100px) rotate(360deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-105vh) translateX(120px) rotate(360deg); opacity: 0; }
         }
 
-        /* 3D Premium Cake Setup */
+        /* Live Interactive Particle Magic Wand System */
+        .magic-sparkle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 14px;
+            z-index: 100;
+            animation: particleFade 1s forwards ease-out;
+        }
+        @keyframes particleFade {
+            0% { transform: translate(-50%, -50%) scale(1.5) translateY(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.3) translateY(40px); opacity: 0; }
+        }
+
+        /* Premium 3D Cake Design Configuration */
         .cake {
             position: relative;
             width: 220px;
@@ -64,7 +77,7 @@
             border-radius: 24px 24px 6px 6px;
             box-shadow: 0px 15px 35px rgba(244, 151, 142, 0.45), inset 0 10px 0 rgba(255,255,255,0.4);
         }
-        /* Colorful Sprinkles */
+        /* Color Sprinkles Overlay */
         .cake::after {
             content: "•";
             position: absolute;
@@ -126,12 +139,12 @@
             box-shadow: 0px 12px 25px rgba(0,0,0,0.08);
         }
 
-        /* Polaroid Photo Card Shine & Entry Animations */
+        /* Glassmorphism Polaroid Frame Mechanics */
         .polaroid {
             background: #ffffff;
             position: relative;
             overflow: hidden;
-            border: 4px solid #fbc4b6; /* Soft gold foil accent track */
+            border: 4px solid #fbc4b6;
         }
         .polaroid::before {
             content: '';
@@ -147,22 +160,22 @@
             100% { left: 150%; }
         }
 
-        /* Staggered text presentation speeds */
+        /* Staggered Text Engine */
         .reveal-p { opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .show-p { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
+<body class="min-h-screen flex items-center justify-center p-4 overflow-hidden relative" onmousemove="spawnSparkle(event)" ontouchmove="spawnSparkle(event)">
 
     <div class="orb w-80 h-80 bg-pink-200 top-5 left-5" style="animation-delay: 0s;"></div>
     <div class="orb w-96 h-96 bg-purple-200 bottom-5 right-5" style="animation-delay: 3s;"></div>
     <div class="orb w-72 h-72 bg-amber-100 top-1/3 left-1/4" style="animation-delay: 6s;"></div>
 
-    <div class="sparkle-particle" style="left: 10%; animation-delay: 0s;">✨</div>
-    <div class="sparkle-particle" style="left: 25%; animation-delay: 4s;">❤️</div>
-    <div class="sparkle-particle" style="left: 45%; animation-delay: 2s;">🎈</div>
-    <div class="sparkle-particle" style="left: 65%; animation-delay: 7s;">✨</div>
-    <div class="sparkle-particle" style="left: 85%; animation-delay: 5s;">❤️</div>
+    <div class="sparkle-particle" style="left: 7%; animation-delay: 0s;">✨</div>
+    <div class="sparkle-particle" style="left: 22%; animation-delay: 4s;">💖</div>
+    <div class="sparkle-particle" style="left: 41%; animation-delay: 2s;">🎈</div>
+    <div class="sparkle-particle" style="left: 63%; animation-delay: 7s;">🎁</div>
+    <div class="sparkle-particle" style="left: 88%; animation-delay: 5s;">✨</div>
 
     <div id="envelopeScreen" class="max-w-md w-full text-center bg-white/70 backdrop-blur-2xl p-10 rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.12)] border border-white/50 transition-all duration-700 transform scale-100 hover:scale-[1.02]">
         <div class="text-8xl mb-6 inline-block animate-bounce" style="animation-duration: 2.5s;">✨✉️✨</div>
@@ -174,7 +187,7 @@
     </div>
 
     <div id="cakeScreen" class="hidden max-w-md w-full text-center flex flex-col items-center transition-all duration-700 opacity-0 transform translate-y-12">
-        <h2 class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 uppercase tracking-wider mb-4 px-2 drop-shadow-md">
+        <h2 class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 uppercase tracking-wider mb-4 px-2 drop-shadow-sm">
             HAPPY BIRTHDAY ROBEEE🥳
         </h2>
         <p class="text-gray-800 font-bold text-sm mb-24 bg-white/60 backdrop-blur-xl px-6 py-2.5 rounded-full border border-white/70 shadow-md">
@@ -220,8 +233,68 @@
     </div>
 
     <script>
-        // Smooth layout activation: Envelope -> Cake Screen
+        // Native Web Audio Synthesis Engine (Zero external dependencies)
+        let audioCtx;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playChimeEffect() {
+            initAudio();
+            const now = audioCtx.currentTime;
+            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
+            notes.forEach((freq, idx) => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                gainNode.gain.setValueAtTime(0.12, now + idx * 0.08);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 0.5);
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                osc.start(now + idx * 0.08);
+                osc.stop(now + idx * 0.08 + 0.5);
+            });
+        }
+
+        function playExtinguishEffect() {
+            initAudio();
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(320, now);
+            osc.frequency.exponentialRampToValueAtTime(60, now + 0.35);
+            gainNode.gain.setValueAtTime(0.25, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.35);
+        }
+
+        // Real-time Custom Pointer Magic Wand system
+        const elements = ['✨', '💖', '🌸', '⭐️', '🎈'];
+        function spawnSparkle(e) {
+            if (Math.random() > 0.15) return; // Prevent overcrowding particles
+            const x = e.pageX || (e.touches && e.touches[0].pageX);
+            const y = e.pageY || (e.touches && e.touches[0].pageY);
+            if (!x || !y) return;
+
+            const particle = document.createElement('span');
+            particle.className = 'magic-sparkle';
+            particle.textContent = elements[Math.floor(Math.random() * elements.length)];
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 1000);
+        }
+
+        // Structural UI Handoff sequences
         function openEnvelope() {
+            playChimeEffect();
             const env = document.getElementById('envelopeScreen');
             const cakeScreen = document.getElementById('cakeScreen');
             
@@ -235,8 +308,8 @@
             }, 500);
         }
 
-        // Upgraded Showstopper Blast Confetti Arrangement
         function blowCandle() {
+            playExtinguishEffect();
             const flame = document.getElementById('candleFlame');
             const cakeScreen = document.getElementById('cakeScreen');
             const letterScreen = document.getElementById('letterScreen');
@@ -244,23 +317,23 @@
             flame.style.opacity = '0';
             flame.style.pointerEvents = 'none';
 
-            // Confetti Stage 1: Left & Right Crossfire Blasts
-            confetti({ particleCount: 70, angle: 60, spread: 75, origin: { x: 0, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
-            confetti({ particleCount: 70, angle: 120, spread: 75, origin: { x: 1, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
+            // Confetti Stage 1: Side Crossfire Cannon blasts
+            confetti({ particleCount: 75, angle: 60, spread: 80, origin: { x: 0, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
+            confetti({ particleCount: 75, angle: 120, spread: 80, origin: { x: 1, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
 
-            // Confetti Stage 2: Central Fireworks Grand Finale
+            // Confetti Stage 2: Central Fireworks Grand Burst
             setTimeout(() => {
-                confetti({ particleCount: 100, spread: 110, origin: { y: 0.45 }, scalar: 1.25 });
+                confetti({ particleCount: 110, spread: 120, origin: { y: 0.45 }, scalar: 1.3 });
             }, 250);
 
-            // Confetti Stage 3: Dynamic ceiling drizzle shower
+            // Confetti Stage 3: Constant golden ceiling drizzle shower
             var end = Date.now() + 2500;
             (function frame() {
                 confetti({ particleCount: 4, angle: 90, spread: 360, origin: { x: Math.random(), y: 0 }, colors: ['#ffea00', '#ff9e00', '#ffffff'] });
                 if (Date.now() < end) { requestAnimationFrame(frame); }
             }());
 
-            // Transition gracefully into the Polaroid Scrapbook Entry Card
+            // Transition gracefully into structural letter deck
             setTimeout(() => {
                 cakeScreen.classList.add('opacity-0', 'translate-y-[-30px]');
                 setTimeout(() => {
@@ -268,11 +341,11 @@
                     letterScreen.classList.remove('hidden');
                     setTimeout(() => {
                         letterScreen.classList.remove('opacity-0', 'scale-90');
-                        // Trigger staggered paragraph reveal effects
+                        // Precision Staggered reveal sequence
                         setTimeout(() => document.getElementById('p1').classList.add('show-p'), 400);
-                        setTimeout(() => document.getElementById('p2').classList.add('show-p'), 1200);
-                        setTimeout(() => document.getElementById('p3').classList.add('show-p'), 2000);
-                        setTimeout(() => document.getElementById('p4').classList.add('show-p'), 2600);
+                        setTimeout(() => document.getElementById('p2').classList.add('show-p'), 1300);
+                        setTimeout(() => document.getElementById('p3').classList.add('show-p'), 2200);
+                        setTimeout(() => document.getElementById('p4').classList.add('show-p'), 2900);
                     }, 50);
                 }, 600);
             }, 1800);
@@ -280,4 +353,3 @@
     </script>
 </body>
 </html>
-
