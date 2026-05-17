@@ -24,7 +24,7 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Floating Background Orbs */
+        /* Floating Background Orbs - touch safe */
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -32,6 +32,7 @@
             opacity: 0.5;
             z-index: -1;
             animation: floatOrb 10s ease-in-out infinite;
+            pointer-events: none;
         }
         @keyframes floatOrb {
             0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
@@ -71,8 +72,8 @@
         /* Premium 3D Cake Design Configuration */
         .cake {
             position: relative;
-            width: 220px;
-            height: 130px;
+            width: 200px;
+            height: 120px;
             background: linear-gradient(to bottom, #ffcad4, #f4978e);
             border-radius: 24px 24px 6px 6px;
             box-shadow: 0px 15px 35px rgba(244, 151, 142, 0.45), inset 0 10px 0 rgba(255,255,255,0.4);
@@ -93,18 +94,18 @@
         .drips {
             position: absolute;
             width: 100%;
-            height: 26px;
+            height: 24px;
             background: #e56b6f;
-            top: 22px;
+            top: 20px;
             border-radius: 0 0 16px 16px;
             box-shadow: 0 5px 8px rgba(0,0,0,0.06);
         }
         .candle {
             position: absolute;
-            width: 16px;
-            height: 55px;
+            width: 14px;
+            height: 50px;
             background: linear-gradient(to right, #90e0ef, #00b4d8, #90e0ef);
-            top: -55px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
             border-radius: 8px 8px 0 0;
@@ -112,11 +113,11 @@
         }
         .flame {
             position: absolute;
-            width: 24px;
-            height: 36px;
+            width: 22px;
+            height: 34px;
             background: radial-gradient(circle, #ffffff 0%, #fff700 25%, #ff9e00 60%, #ff0054 100%);
             border-radius: 50% 50% 20% 20%;
-            top: -34px;
+            top: -32px;
             left: 50%;
             transform: translateX(-50%);
             animation: flameWobble 0.4s infinite alternate, flameGlow 1.5s infinite alternate;
@@ -131,8 +132,8 @@
             100% { box-shadow: 0 0 35px #ff9e00, 0 0 65px #ff0054; }
         }
         .plate {
-            width: 280px;
-            height: 18px;
+            width: 260px;
+            height: 16px;
             background: #ffffff;
             border: 2px solid #ffe5ec;
             border-radius: 50px;
@@ -165,11 +166,11 @@
         .show-p { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 overflow-hidden relative" onmousemove="spawnSparkle(event)" ontouchmove="spawnSparkle(event)">
+<body class="min-h-screen w-full flex justify-center items-start md:items-center py-8 px-4 overflow-x-hidden overflow-y-auto relative" onmousemove="spawnSparkle(event)" ontouchmove="spawnSparkle(event)">
 
-    <div class="orb w-80 h-80 bg-pink-200 top-5 left-5" style="animation-delay: 0s;"></div>
-    <div class="orb w-96 h-96 bg-purple-200 bottom-5 right-5" style="animation-delay: 3s;"></div>
-    <div class="orb w-72 h-72 bg-amber-100 top-1/3 left-1/4" style="animation-delay: 6s;"></div>
+    <div class="orb w-64 h-64 md:w-80 md:h-80 bg-pink-200 top-5 left-5" style="animation-delay: 0s;"></div>
+    <div class="orb w-72 h-72 md:w-96 md:h-96 bg-purple-200 bottom-5 right-5" style="animation-delay: 3s;"></div>
+    <div class="orb w-56 h-56 md:w-72 md:h-72 bg-amber-100 top-1/3 left-1/4" style="animation-delay: 6s;"></div>
 
     <div class="sparkle-particle" style="left: 7%; animation-delay: 0s;">✨</div>
     <div class="sparkle-particle" style="left: 22%; animation-delay: 4s;">💖</div>
@@ -177,20 +178,20 @@
     <div class="sparkle-particle" style="left: 63%; animation-delay: 7s;">🎁</div>
     <div class="sparkle-particle" style="left: 88%; animation-delay: 5s;">✨</div>
 
-    <div id="envelopeScreen" class="max-w-md w-full text-center bg-white/70 backdrop-blur-2xl p-10 rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.12)] border border-white/50 transition-all duration-700 transform scale-100 hover:scale-[1.02]">
-        <div class="text-8xl mb-6 inline-block animate-bounce" style="animation-duration: 2.5s;">✨✉️✨</div>
-        <h1 class="text-3xl font-black text-gray-800 tracking-tight mb-3">Adlaw mo na ni</h1>
+    <div id="envelopeScreen" class="max-w-md w-full text-center bg-white/70 backdrop-blur-2xl p-8 md:p-10 rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.12)] border border-white/50 transition-all duration-700 transform scale-100 mt-10 md:mt-0">
+        <div class="text-7xl md:text-8xl mb-6 inline-block animate-bounce" style="animation-duration: 2.5s;">✨✉️✨</div>
+        <h1 class="text-2xl md:text-3xl font-black text-gray-800 tracking-tight mb-3">Adlaw mo na ni</h1>
         <p class="text-gray-600 mb-10 text-sm font-semibold tracking-wide uppercase">Exklosib para simo</p>
-        <button onclick="openEnvelope()" class="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:from-pink-600 hover:to-indigo-600 text-white font-extrabold py-4.5 px-6 rounded-2xl shadow-xl hover:shadow-purple-500/30 transition-all transform hover:-translate-y-1 active:translate-y-0 cursor-pointer tracking-wider text-base">
+        <button onclick="openEnvelope()" class="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:from-pink-600 hover:to-indigo-600 text-white font-extrabold py-4 px-6 rounded-2xl shadow-xl hover:shadow-purple-500/30 transition-all transform hover:-translate-y-1 active:translate-y-0 cursor-pointer tracking-wider text-base">
             E open ,pinduta ako💖
         </button>
     </div>
 
-    <div id="cakeScreen" class="hidden max-w-md w-full text-center flex flex-col items-center transition-all duration-700 opacity-0 transform translate-y-12">
-        <h2 class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 uppercase tracking-wider mb-4 px-2 drop-shadow-sm">
+    <div id="cakeScreen" class="hidden max-w-md w-full text-center flex flex-col items-center transition-all duration-700 opacity-0 transform translate-y-12 mt-6 md:mt-0">
+        <h2 class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 uppercase tracking-wider mb-4 px-2 drop-shadow-sm">
             HAPPY BIRTHDAY ROBEEE🥳
         </h2>
-        <p class="text-gray-800 font-bold text-sm mb-24 bg-white/60 backdrop-blur-xl px-6 py-2.5 rounded-full border border-white/70 shadow-md">
+        <p class="text-gray-800 font-bold text-xs md:text-sm mb-20 md:text-sm bg-white/60 backdrop-blur-xl px-5 py-2.5 rounded-full border border-white/70 shadow-md mx-2">
             Make a beautiful wish kag Pinduta ang kalayo
         </p>
         
@@ -205,18 +206,18 @@
         </div>
     </div>
 
-    <div id="letterScreen" class="hidden max-w-md w-full bg-white/85 backdrop-blur-3xl p-6 rounded-[2.5rem] shadow-[0_35px_70px_rgba(0,0,0,0.18)] border border-white/70 transition-all duration-1000 opacity-0 transform scale-90">
+    <div id="letterScreen" class="hidden max-w-md w-full bg-white/85 backdrop-blur-3xl p-5 md:p-6 rounded-[2.5rem] shadow-[0_35px_70px_rgba(0,0,0,0.18)] border border-white/70 transition-all duration-1000 opacity-0 transform scale-90 mb-12">
         
-        <div class="polaroid w-full p-3 pb-8 rounded-3xl shadow-xl rotate-[-1.5deg] hover:rotate-0 transition-transform duration-500 border border-gray-100 mb-8 group">
-            <div class="w-full h-64 rounded-2xl overflow-hidden bg-gray-50 relative shadow-inner">
+        <div class="polaroid w-full p-3 pb-6 rounded-3xl shadow-xl rotate-[-1.5deg] hover:rotate-0 transition-transform duration-500 border border-gray-100 mb-6 group">
+            <div class="w-full h-52 md:h-64 rounded-2xl overflow-hidden bg-gray-50 relative shadow-inner">
                 <img src="https://i.ibb.co/ch7CfzZd/1766118564457-3.jpg" alt="Celebration photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent"></div>
             </div>
-            <div class="text-center mt-4 cursive text-3xl text-pink-600 font-extrabold tracking-wide">Best Day Ever ✨</div>
+            <div class="text-center mt-3 cursive text-2xl md:text-3xl text-pink-600 font-extrabold tracking-wide">Best Day Ever ✨</div>
         </div>
 
-        <div class="text-gray-800 space-y-4 text-[14.5px] font-medium leading-relaxed px-2">
-            <h3 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 text-center mb-5 tracking-tight">
+        <div class="text-gray-800 space-y-4 text-[14px] md:text-[14.5px] font-medium leading-relaxed px-1">
+            <h3 class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 text-center mb-4 tracking-tight">
                 To Someone Incredible, Abaw inkredibol kuno 🥂
             </h3>
             
@@ -224,9 +225,9 @@
             
             <p class="reveal-p font-semibold text-gray-700" id="p2">Sa liwan Happy Burtdey lng liwat , pero daw namit tana Sam G to sa Sj nuh or Jabi? Ayy HAAHAHAHA, pakabout na nugay sagi minaldita 😌 hilig ka gd mang away sa mga bata haahaha pati ako gina damay mo pa Haahahaha pasalamat ka kay bout ko dapat ma sunod ka sakun 🥴ehe hahaahaha</p>
             
-            <p class="reveal-p font-bold text-gray-900 text-center py-2 bg-pink-50/60 border border-pink-100 rounded-xl" id="p3">Go celebrate hard, laugh tons, and enjoy every single slice of today!</p>
+            <p class="reveal-p font-bold text-gray-900 text-center py-2 px-3 bg-pink-50/60 border border-pink-100 rounded-xl text-xs md:text-sm" id="p3">Go celebrate hard, laugh tons, and enjoy every single slice of today!</p>
             
-            <p class="reveal-p text-right font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 cursive text-3xl pt-4" id="p4">
+            <p class="reveal-p text-right font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 cursive text-2xl md:text-3xl pt-2" id="p4">
                 -Ur Bebe Premium Edition 🥴
             </p>
         </div>
@@ -244,7 +245,7 @@
         function playChimeEffect() {
             initAudio();
             const now = audioCtx.currentTime;
-            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
+            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; 
             notes.forEach((freq, idx) => {
                 const osc = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
@@ -275,10 +276,10 @@
             osc.stop(now + 0.35);
         }
 
-        // Real-time Custom Pointer Magic Wand system
+        // Real-time Mobile and Desktop Custom Pointer Magic Wand system
         const elements = ['✨', '💖', '🌸', '⭐️', '🎈'];
         function spawnSparkle(e) {
-            if (Math.random() > 0.15) return; // Prevent overcrowding particles
+            if (Math.random() > 0.15) return; 
             const x = e.pageX || (e.touches && e.touches[0].pageX);
             const y = e.pageY || (e.touches && e.touches[0].pageY);
             if (!x || !y) return;
@@ -318,12 +319,12 @@
             flame.style.pointerEvents = 'none';
 
             // Confetti Stage 1: Side Crossfire Cannon blasts
-            confetti({ particleCount: 75, angle: 60, spread: 80, origin: { x: 0, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
-            confetti({ particleCount: 75, angle: 120, spread: 80, origin: { x: 1, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
+            confetti({ particleCount: 65, angle: 60, spread: 75, origin: { x: 0, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
+            confetti({ particleCount: 65, angle: 120, spread: 75, origin: { x: 1, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
 
             // Confetti Stage 2: Central Fireworks Grand Burst
             setTimeout(() => {
-                confetti({ particleCount: 110, spread: 120, origin: { y: 0.45 }, scalar: 1.3 });
+                confetti({ particleCount: 90, spread: 110, origin: { y: 0.45 }, scalar: 1.25 });
             }, 250);
 
             // Confetti Stage 3: Constant golden ceiling drizzle shower
@@ -339,6 +340,7 @@
                 setTimeout(() => {
                     cakeScreen.classList.add('hidden');
                     letterScreen.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Reset viewport to top of letter layout
                     setTimeout(() => {
                         letterScreen.classList.remove('opacity-0', 'scale-90');
                         // Precision Staggered reveal sequence
