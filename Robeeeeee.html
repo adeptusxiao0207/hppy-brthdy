@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY BIRTHDAY ROBEEE! 🥳</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(-45deg, #ffb5a7, #ffe5ec, #d8bbff, #ffd6ff);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+        }
+        .cursive {
+            font-family: 'Caveat', cursive;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: floatOrb 10s ease-in-out infinite;
+        }
+        @keyframes floatOrb {
+            0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
+            50% { transform: translateY(-40px) scale(1.15) rotate(180deg); }
+        }
+
+        /* Magical Floating Elements */
+        .sparkle-particle {
+            position: absolute;
+            bottom: -5%;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: flyUp 12s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+        @keyframes flyUp {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-105vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* 3D Premium Cake Setup */
+        .cake {
+            position: relative;
+            width: 220px;
+            height: 130px;
+            background: linear-gradient(to bottom, #ffcad4, #f4978e);
+            border-radius: 24px 24px 6px 6px;
+            box-shadow: 0px 15px 35px rgba(244, 151, 142, 0.45), inset 0 10px 0 rgba(255,255,255,0.4);
+        }
+        /* Colorful Sprinkles */
+        .cake::after {
+            content: "•";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 35px;
+            left: 0;
+            color: #b5e2fa;
+            text-shadow: 30px 10px 0 #edafb8, 70px -5px 0 #f7d1cd, 120px 15px 0 #e2afe5, 150px -2px 0 #fff3b0, 180px 12px 0 #b5e2fa, 45px 25px 0 #fff3b0;
+            font-size: 24px;
+            opacity: 0.9;
+        }
+        .drips {
+            position: absolute;
+            width: 100%;
+            height: 26px;
+            background: #e56b6f;
+            top: 22px;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 5px 8px rgba(0,0,0,0.06);
+        }
+        .candle {
+            position: absolute;
+            width: 16px;
+            height: 55px;
+            background: linear-gradient(to right, #90e0ef, #00b4d8, #90e0ef);
+            top: -55px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+        .flame {
+            position: absolute;
+            width: 24px;
+            height: 36px;
+            background: radial-gradient(circle, #ffffff 0%, #fff700 25%, #ff9e00 60%, #ff0054 100%);
+            border-radius: 50% 50% 20% 20%;
+            top: -34px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flameWobble 0.4s infinite alternate, flameGlow 1.5s infinite alternate;
+            cursor: pointer;
+        }
+        @keyframes flameWobble {
+            0% { transform: translateX(-50%) scale(1) rotate(-3deg); }
+            100% { transform: translateX(-50%) scale(1.2) rotate(4deg); }
+        }
+        @keyframes flameGlow {
+            0% { box-shadow: 0 0 20px #ff9e00, 0 0 40px #ff0054; }
+            100% { box-shadow: 0 0 35px #ff9e00, 0 0 65px #ff0054; }
+        }
+        .plate {
+            width: 280px;
+            height: 18px;
+            background: #ffffff;
+            border: 2px solid #ffe5ec;
+            border-radius: 50px;
+            box-shadow: 0px 12px 25px rgba(0,0,0,0.08);
+        }
+
+        /* Polaroid Photo Card Shine & Entry Animations */
+        .polaroid {
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #fbc4b6; /* Soft gold foil accent track */
+        }
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: cardShine 6s infinite;
+        }
+        @keyframes cardShine {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Staggered text presentation speeds */
+        .reveal-p { opacity: 0; transform: translateY(15px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .show-p { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
+
+    <div class="orb w-80 h-80 bg-pink-200 top-5 left-5" style="animation-delay: 0s;"></div>
+    <div class="orb w-96 h-96 bg-purple-200 bottom-5 right-5" style="animation-delay: 3s;"></div>
+    <div class="orb w-72 h-72 bg-amber-100 top-1/3 left-1/4" style="animation-delay: 6s;"></div>
+
+    <div class="sparkle-particle" style="left: 10%; animation-delay: 0s;">✨</div>
+    <div class="sparkle-particle" style="left: 25%; animation-delay: 4s;">❤️</div>
+    <div class="sparkle-particle" style="left: 45%; animation-delay: 2s;">🎈</div>
+    <div class="sparkle-particle" style="left: 65%; animation-delay: 7s;">✨</div>
+    <div class="sparkle-particle" style="left: 85%; animation-delay: 5s;">❤️</div>
+
+    <div id="envelopeScreen" class="max-w-md w-full text-center bg-white/70 backdrop-blur-2xl p-10 rounded-[2.5rem] shadow-[0_25px_60px_rgba(0,0,0,0.12)] border border-white/50 transition-all duration-700 transform scale-100 hover:scale-[1.02]">
+        <div class="text-8xl mb-6 inline-block animate-bounce" style="animation-duration: 2.5s;">✨✉️✨</div>
+        <h1 class="text-3xl font-black text-gray-800 tracking-tight mb-3">Adlaw mo na ni</h1>
+        <p class="text-gray-600 mb-10 text-sm font-semibold tracking-wide uppercase">Exklosib para simo</p>
+        <button onclick="openEnvelope()" class="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:from-pink-600 hover:to-indigo-600 text-white font-extrabold py-4.5 px-6 rounded-2xl shadow-xl hover:shadow-purple-500/30 transition-all transform hover:-translate-y-1 active:translate-y-0 cursor-pointer tracking-wider text-base">
+            E open ,pinduta ako💖
+        </button>
+    </div>
+
+    <div id="cakeScreen" class="hidden max-w-md w-full text-center flex flex-col items-center transition-all duration-700 opacity-0 transform translate-y-12">
+        <h2 class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 uppercase tracking-wider mb-4 px-2 drop-shadow-md">
+            HAPPY BIRTHDAY ROBEEE🥳
+        </h2>
+        <p class="text-gray-800 font-bold text-sm mb-24 bg-white/60 backdrop-blur-xl px-6 py-2.5 rounded-full border border-white/70 shadow-md">
+            Make a beautiful wish kag Pinduta ang kalayo
+        </p>
+        
+        <div class="relative flex flex-col items-center mb-12 transform hover:scale-105 transition-transform duration-500">
+            <div class="candle">
+                <div id="candleFlame" onclick="blowCandle()" class="flame"></div>
+            </div>
+            <div class="cake">
+                <div class="drips"></div>
+            </div>
+            <div class="plate"></div>
+        </div>
+    </div>
+
+    <div id="letterScreen" class="hidden max-w-md w-full bg-white/85 backdrop-blur-3xl p-6 rounded-[2.5rem] shadow-[0_35px_70px_rgba(0,0,0,0.18)] border border-white/70 transition-all duration-1000 opacity-0 transform scale-90">
+        
+        <div class="polaroid w-full p-3 pb-8 rounded-3xl shadow-xl rotate-[-1.5deg] hover:rotate-0 transition-transform duration-500 border border-gray-100 mb-8 group">
+            <div class="w-full h-64 rounded-2xl overflow-hidden bg-gray-50 relative shadow-inner">
+                <img src="https://i.ibb.co/ch7CfzZd/1766118564457-3.jpg" alt="Celebration photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent"></div>
+            </div>
+            <div class="text-center mt-4 cursive text-3xl text-pink-600 font-extrabold tracking-wide">Best Day Ever ✨</div>
+        </div>
+
+        <div class="text-gray-800 space-y-4 text-[14.5px] font-medium leading-relaxed px-2">
+            <h3 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 text-center mb-5 tracking-tight">
+                To Someone Incredible 🥂
+            </h3>
+            
+            <p class="reveal-p font-semibold text-gray-700" id="p1">Happy, happy birthday, Robebee! Pira kana ani 25? Awa 23 ali ehe , teh maano nata kay e celebrate ta ni imong ika Dos Tres nga edad ,Where ta malaag liwat?ano kan un ta?diin ta liwan ma overnight ?ma shat ta?djk buot ko ali Haahaha</p>
+            
+            <p class="reveal-p font-semibold text-gray-700" id="p2">Sa liwat Happy Burtdey lng liwat , pero daw namit tana sam g to sa sj nuh? Ayy HAAHAHAHA, pakabout na nugay sagi minaldita 😌 hilig ka gd mang away haahaha pati ako gina damay mo pa Haahahaha pasalamat ka kay bout ko dapat ma sunod ka sakun 🥴ehe hahaahaha</p>
+            
+            <p class="reveal-p font-bold text-gray-900 text-center py-2 bg-pink-50/60 border border-pink-100 rounded-xl" id="p3">Go celebrate hard, laugh tons, and enjoy every single slice of today!</p>
+            
+            <p class="reveal-p text-right font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 cursive text-3xl pt-4" id="p4">
+                -Ur Bebe Premium Edition 🥴
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth layout activation: Envelope -> Cake Screen
+        function openEnvelope() {
+            const env = document.getElementById('envelopeScreen');
+            const cakeScreen = document.getElementById('cakeScreen');
+            
+            env.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                env.classList.add('hidden');
+                cakeScreen.classList.remove('hidden');
+                setTimeout(() => {
+                    cakeScreen.classList.remove('opacity-0', 'translate-y-12');
+                }, 50);
+            }, 500);
+        }
+
+        // Upgraded Showstopper Blast Confetti Arrangement
+        function blowCandle() {
+            const flame = document.getElementById('candleFlame');
+            const cakeScreen = document.getElementById('cakeScreen');
+            const letterScreen = document.getElementById('letterScreen');
+
+            flame.style.opacity = '0';
+            flame.style.pointerEvents = 'none';
+
+            // Confetti Stage 1: Left & Right Crossfire Blasts
+            confetti({ particleCount: 70, angle: 60, spread: 75, origin: { x: 0, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
+            confetti({ particleCount: 70, angle: 120, spread: 75, origin: { x: 1, y: 0.6 }, colors: ['#ff0054', '#9d4edd', '#4ea8de', '#ffb5a7'] });
+
+            // Confetti Stage 2: Central Fireworks Grand Finale
+            setTimeout(() => {
+                confetti({ particleCount: 100, spread: 110, origin: { y: 0.45 }, scalar: 1.25 });
+            }, 250);
+
+            // Confetti Stage 3: Dynamic ceiling drizzle shower
+            var end = Date.now() + 2500;
+            (function frame() {
+                confetti({ particleCount: 4, angle: 90, spread: 360, origin: { x: Math.random(), y: 0 }, colors: ['#ffea00', '#ff9e00', '#ffffff'] });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+
+            // Transition gracefully into the Polaroid Scrapbook Entry Card
+            setTimeout(() => {
+                cakeScreen.classList.add('opacity-0', 'translate-y-[-30px]');
+                setTimeout(() => {
+                    cakeScreen.classList.add('hidden');
+                    letterScreen.classList.remove('hidden');
+                    setTimeout(() => {
+                        letterScreen.classList.remove('opacity-0', 'scale-90');
+                        // Trigger staggered paragraph reveal effects
+                        setTimeout(() => document.getElementById('p1').classList.add('show-p'), 400);
+                        setTimeout(() => document.getElementById('p2').classList.add('show-p'), 1200);
+                        setTimeout(() => document.getElementById('p3').classList.add('show-p'), 2000);
+                        setTimeout(() => document.getElementById('p4').classList.add('show-p'), 2600);
+                    }, 50);
+                }, 600);
+            }, 1800);
+        }
+    </script>
+</body>
+</html>
+
